@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { redirect } from "next/navigation";
+import Link from "next/link";
 
 interface SharePageProps {
   params: Promise<{
@@ -48,12 +49,12 @@ export default async function SharePage({ params }: SharePageProps) {
                 Shared by {conversation.user.name || "Anonymous"}
               </p>
             </div>
-            <a
+            <Link
               href="/"
               className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700"
             >
               Start Your Own Chat
-            </a>
+            </Link>
           </div>
         </div>
       </div>

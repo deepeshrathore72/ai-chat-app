@@ -69,7 +69,7 @@ export async function GET(request: NextRequest) {
         createdAt: message.createdAt,
       });
       return acc;
-    }, {} as Record<string, any>);
+    }, {} as Record<string, { conversation: { id: string; title: string; updatedAt: Date }; messages: Array<{ id: string; role: string; content: string; createdAt: Date }> }>);
 
     return new Response(
       JSON.stringify({

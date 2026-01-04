@@ -44,7 +44,7 @@ export default function ChatInterface({
   const [isLoading, setIsLoading] = useState(false);
   const [showShareDialog, setShowShareDialog] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchResults, setSearchResults] = useState<any[]>([]);
+  const [searchResults, setSearchResults] = useState<Array<{ id: string; content: string; conversation: { id: string; title: string } }>>([]);
   const [showMetadataEdit, setShowMetadataEdit] = useState(false);
   const [editingTitle, setEditingTitle] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -140,7 +140,7 @@ export default function ChatInterface({
         throw new Error(errorData.error || `Failed to edit message (${response.status})`);
       }
 
-      const updatedMessage = await response.json();
+      await response.json();
       
       // Find the index of the edited message
       const messageIndex = messages.findIndex((msg) => msg.id === messageId);
@@ -449,7 +449,7 @@ export default function ChatInterface({
                 <div className="mb-2 space-y-1">
                   <div className="rounded-lg bg-blue-900/20 border border-blue-700/50 p-2">
                     <div className="flex items-center justify-between mb-1">
-                      <span className="text-xs font-medium text-blue-400">Searching: "{searchQuery}"</span>
+                      <span className="text-xs font-medium text-blue-400">Searching: &quot;{searchQuery}&quot;</span>
                       <button onClick={clearSearch} className="text-xs text-slate-400 hover:text-white">
                         ✕
                       </button>
@@ -458,7 +458,7 @@ export default function ChatInterface({
                   </div>
                   {searchResults.length > 0 && (
                     <div className="space-y-1 max-h-48 overflow-y-auto">
-                      {searchResults.map((result: any) => (
+                      {searchResults.map((result) => (
                         <button
                           key={result.id}
                           onClick={() => {
@@ -714,7 +714,10 @@ export default function ChatInterface({
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' && !e.shiftKey) {
                     e.preventDefault();
-                    handleSubmit(e as any);
+                    const form = e.currentTarget.form;
+                    if (form) {
+                      handleSubmit(new Event('submit') as unknown as React.FormEvent<HTMLFormElement>);
+                    }
                   }
                 }}
                 placeholder="Message AI..."

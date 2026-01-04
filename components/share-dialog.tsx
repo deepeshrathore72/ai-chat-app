@@ -82,7 +82,7 @@ export function ShareDialog({ conversationId, isShared: initialIsShared, onClose
           {!isShared ? (
             <>
               <p className="text-sm text-slate-300">
-                Share this conversation with anyone. They'll be able to view the messages but not edit them.
+                Share this conversation with anyone. They&apos;ll be able to view the messages but not edit them.
               </p>
               <button
                 onClick={handleShare}
