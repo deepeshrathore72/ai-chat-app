@@ -42,8 +42,6 @@ npm install
 
 You can use a local PostgreSQL instance or a cloud provider like:
 - [Neon](https://neon.tech/) (Recommended for quick setup)
-- [Supabase](https://supabase.com/)
-- [Railway](https://railway.app/)
 - Local PostgreSQL installation
 
 **For local PostgreSQL:**
@@ -175,48 +173,6 @@ The streaming functionality uses:
 - **Client Components**: Interactive chat interface with React state
 - **API Routes**: CRUD operations for conversations and messages
 
-## API Endpoints
-
-### Authentication
-- `GET/POST /api/auth/*` - NextAuth.js authentication routes
-
-### Conversations
-- `GET /api/conversations` - Get all user conversations
-- `POST /api/conversations` - Create new conversation
-- `GET /api/conversations/[id]` - Get specific conversation with messages
-- `PATCH /api/conversations/[id]` - Update conversation title
-- `DELETE /api/conversations/[id]` - Delete conversation
-
-### Chat
-- `POST /api/chat` - Send message and get streaming AI response
-
-## Project Structure
-
-```
-ai-chat-app/
-├── app/
-│   ├── api/
-│   │   ├── auth/[...nextauth]/route.ts  # NextAuth handlers
-│   │   ├── chat/route.ts                # Streaming chat endpoint
-│   │   └── conversations/               # Conversation CRUD
-│   ├── chat/page.tsx                    # Main chat interface
-│   ├── layout.tsx                       # Root layout
-│   └── page.tsx                         # Landing page
-├── components/
-│   ├── chat-interface.tsx               # Main chat UI component
-│   ├── sign-in.tsx                      # GitHub sign-in button
-│   └── sign-out.tsx                     # Sign-out button
-├── lib/
-│   └── prisma.ts                        # Prisma client singleton
-├── prisma/
-│   └── schema.prisma                    # Database schema
-├── types/
-│   └── next-auth.d.ts                   # NextAuth type extensions
-├── auth.ts                              # NextAuth configuration
-├── middleware.ts                        # Route protection
-└── .env.local                           # Environment variables
-```
-
 ## Development Notes
 
 ### Database Migrations
@@ -229,55 +185,28 @@ npx prisma generate         # Regenerate Prisma Client
 npx prisma studio           # Open database GUI
 ```
 
-### Troubleshooting
-
-**Issue: Database connection fails**
-- Check your `DATABASE_URL` format
-- Ensure PostgreSQL is running
-- Verify database credentials
-
-**Issue: GitHub OAuth not working**
-- Verify callback URL matches exactly
-- Check CLIENT_ID and CLIENT_SECRET
-- Ensure AUTH_SECRET is set
-
-**Issue: OpenAI API errors**
-- Verify API key is valid
-- Check your OpenAI account has credits
-- Ensure you're using the correct model name
-
-**Issue: Streaming not working**
-- Ensure you're using Edge runtime
-- Check browser console for errors
-- Verify OpenAI API key permissions
-
 ## Time Tracking
 
-**Total Development Time: ~4-5 hours**
+**Total Development Time: ~5-6 hours**
 
 - Project setup and configuration: 30 minutes
-- Database schema design: 30 minutes
+- Database schema design: 40 minutes
 - Authentication implementation: 45 minutes
 - API routes development: 1 hour
 - Chat interface UI: 1.5 hours
 - Streaming integration: 45 minutes
-- Testing and bug fixes: 45 minutes
-- Documentation: 30 minutes
+- Testing and bug fixes: 1 hour
+- Documentation: 45 minutes
 
 ## Future Enhancements
 
 Potential features to add:
 
-- [ ] **Message Editing/Deletion**: Edit or delete individual messages
-- [ ] **Conversation Sharing**: Share conversations via public links
 - [ ] **Multiple AI Providers**: Support for Anthropic, Cohere, etc.
-- [ ] **Rate Limiting**: Prevent abuse with request throttling
-- [ ] **Message Search**: Search across all conversations
 - [ ] **Conversation Metadata**: Custom tags, favorites, folders
 - [ ] **Voice Input**: Speech-to-text for messages
 - [ ] **Export Conversations**: Download as PDF or markdown
 - [ ] **User Preferences**: Theme selection, font size, etc.
-- [ ] **Typing Indicators**: Show when AI is "thinking"
 
 ## Contributing
 
@@ -287,17 +216,6 @@ This is a demonstration project. Feel free to fork and modify as needed.
 
 MIT License - feel free to use this project for learning or as a base for your own applications.
 
-## Support
-
-For issues or questions:
-1. Check the troubleshooting section above
-2. Review the code comments
-3. Check Next.js, NextAuth, and Prisma documentation
-
 ---
 
-Built with ❤️ using Next.js, OpenAI, and PostgreSQL
-#   a i - c h a t - a p p  
- #   a i - c h a t - a p p  
- #   a i - c h a t - a p p  
- 
+Built with ❤️ By Deepesh
