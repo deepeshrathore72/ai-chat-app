@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // Authentication middleware has been moved to middleware.ts
 };
 
 export default nextConfig;
