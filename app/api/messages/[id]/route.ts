@@ -54,6 +54,27 @@ export async function PATCH(
       );
     }
 
+    // Get all messages in this conversation to find which ones come after the edited message
+    const allMessages = await prisma.message.findMany({
+      where: { conversationId: message.conversationId },
+      orderBy: { createdAt: "asc" },
+    });
+
+    const editedMessageIndex = allMessages.findIndex((msg) => msg.id === messageId);
+    
+    // Delete all messages that come after the edited message (including the old AI response)
+    if (editedMessageIndex !== -1 && editedMessageIndex < allMessages.length - 1) {
+      const messagesToDelete = allMessages.slice(editedMessageIndex + 1);
+      await prisma.message.deleteMany({
+        where: {
+          id: {
+            in: messagesToDelete.map((msg) => msg.id),
+          },
+        },
+      });
+    }
+
+    // Update the user message
     const updatedMessage = await prisma.message.update({
       where: { id: messageId },
       data: {

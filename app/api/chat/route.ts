@@ -44,7 +44,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const { messages, conversationId } = await request.json();
+    const { messages, conversationId, isEdit } = await request.json();
 
     if (!conversationId) {
       return new Response(
@@ -74,15 +74,17 @@ export async function POST(request: Request) {
       );
     }
 
-    // Save user message
+    // Save user message (skip if this is an edit, as message already exists)
     const userMessage = messages[messages.length - 1];
-    await prisma.message.create({
-      data: {
-        conversationId,
-        role: "user",
-        content: userMessage.content,
-      },
-    });
+    if (!isEdit) {
+      await prisma.message.create({
+        data: {
+          conversationId,
+          role: "user",
+          content: userMessage.content,
+        },
+      });
+    }
 
     // Generate title for first message
     if (messages.length === 1) {

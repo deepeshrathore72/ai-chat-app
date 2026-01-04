@@ -166,6 +166,7 @@ export default function ChatInterface({
         body: JSON.stringify({
           messages: updatedMessages,
           conversationId: currentConversationId,
+          isEdit: true,
         }),
       });
 
